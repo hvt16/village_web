@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    
+    {% if villagers %}
+        <div class="container my-5">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Sr.No.</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Contact No.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for villager in villagers %}
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td>{{villager.firstName}} {{villager.lastName}}</td>
+                            <td>{{villager.mobile}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="container my-3">
+            <h3>You are not member of any village. Kindly add your village</h3>
+            <form action= "{{ url_for('add_village') }}" method="POST">
+                <input class="form-control" list="villages" id="village" name="village" placeholder="Enter Your Village's Name">
+                    <datalist id="villages">
+                        {% for vil in allVillages %}
+                        {{vil.village_name}}
+                            <option value="{{vil.village_name}}">{{vil.village_name}}</option>
+                        {% endfor %}
+                    </datalist>
+                <button type="submit" class="btn btn-outline-dark">Add Village</button>
+            </form>
+        </div>
+    {% endif %}
+
+{% endblock body %}

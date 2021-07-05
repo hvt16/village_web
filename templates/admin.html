@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    
+<div class="container my-3">
+    <form action="/admin" method="POST">
+        <div class="mb-3">
+            <input type="text" class="form-control" id="village_name" name="village_name" placeholder="Village Name" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="district" name="district" placeholder="District">
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="state" name="state" placeholder="State">
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Pin Code">
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="lat" name="lat" placeholder="Latitude Value">
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="long" name="long" placeholder="Longitude Value">
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control" id="headsemail" name="headsemail" placeholder="Email Id of Village Head" required>
+        </div>
+        <button type="submit" class="btn btn-outline-dark">Add Village</button>
+      </form>
+
+{% endblock body %}
+

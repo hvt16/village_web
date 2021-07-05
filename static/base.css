@@ -1,0 +1,11 @@
+h3 {
+    text-align: center;
+    color: black;
+    padding: 10px;
+}
+
+.myimage{
+    height:22rem; 
+    width:100%;
+    border-radius: 50%;
+}

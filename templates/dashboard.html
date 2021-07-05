@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    {% if user %}
+
+        {% if 'village_id' in user %}
+            <div class="container my-5">
+                <h3>My Village</h3>
+            <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td>Village Name</td>
+                    <td>{{village.village_name}}</td>
+                  </tr>
+                  <tr>
+                    <td>District</td>
+                    <td>{{village.district}}</td>
+                  </tr>
+                  <tr>
+                    <td>state</td>
+                    <td>{{village.state}}</td>
+                  </tr>
+                  <tr>
+                    <td>pincode</td>
+                    <td>{{village.pincode}}</td>
+                  </tr>
+                  <tr>
+                    <td>email of sarpanch</td>
+                    <td>{{village.head_email}}</td>
+                  </tr>
+                  <tr>
+                    <td>Population</td>
+                    <td>{{village.population}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a href="/leave_village"><button class="btn btn-outline-dark">Leave Village</button></a>
+            </div>
+        {% else %}
+        <div class="container my-3">
+            <h3>You are not member of any village. Kindly add your village</h3>
+            <form action= "{{ url_for('add_village') }}" method="POST">
+                <input class="form-control" list="villages" id="village" name="village" placeholder="Enter Your Village's Name">
+                    <datalist id="villages">
+                        {% for vil in allVillages %}
+                        {{vil.village_name}}
+                            <option value="{{vil.village_name}}">{{vil.village_name}}</option>
+                        {% endfor %}
+                    </datalist>
+                <button type="submit" class="btn btn-outline-dark">Add Village</button>
+              </form>
+        </div>
+        {% endif %}
+    
+
+    {% endif %}
+
+{% endblock body %}

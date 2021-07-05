@@ -1,0 +1,38 @@
+{% extends 'base0.html' %}
+
+{% block body %}
+
+<div class="container my-3">
+    <form action="/register" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="lasttname" name="lastname" placeholder="Last Name">
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" required>
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" id="conf_password" name="conf_password" placeholder="Confirm Password" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="idfile">Id Proof</label>
+            <input type="file" class="form-control-file" id="idfile" name="idfile">
+        </div>
+        <button type="submit" class="btn btn-outline-dark">Register</button>
+      </form>
+      <div class="my-3">
+        <span>already have account? <a href="/login">login here</a></span>
+      </div>
+    
+</div>
+    
+
+{% endblock body %}

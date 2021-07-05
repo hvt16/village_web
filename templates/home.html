@@ -1,0 +1,12 @@
+{% extends 'base0.html' %}
+{% block body %}
+
+    <h2>This is My Village application</h2>
+    {% if s %}
+        {{s}}
+    {% endif %}
+    <a href="/login">Login</a>
+    <br>
+    <a href="/register">Register</a>
+
+{% endblock body %}

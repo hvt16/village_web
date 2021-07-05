@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% if 'village_id' in user %}
+<h3>Raise An Issue</h3>
+<div class="container d-flex justify-content-center my-4">
+    <form action="/add_issue" method="POST">
+        <div class="mb-3">
+            <input type="text" class="form-control" name="subject" placeholder="Subject...">
+        </div>
+        <div class="mb-3">
+            <textarea type="text" class="form-control" name="description" rows="4" cols="50"
+                placeholder="Describe the issue..."></textarea>
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+            <button type="submit" class="btn btn-dark">Add</button>
+        </div>
+    </form>
+</div>
+
+<hr>
+
+<h3>Issues</h3>
+
+<div class="container my-4">
+
+    {% if allIssues|length == 0 %}
+        <div class="alert alert-dark" role="alert">
+            No issues raise so far!!
+        </div>
+    {% else %}
+        {% for issue in allIssues %}
+            <div class="card my-3">
+                <div class="card-header">
+                    <div class="float-start">
+                        <h5 class="card-title">{{loop.index}}. {{issue.subject}}</h5>
+                    </div>
+                    <div class="float-end">
+                        {% if 'Open' == issue.status %}
+                            <span class="badge rounded-pill bg-danger">{{issue.status}}</span>
+                        {% else %}
+                            <span class="badge rounded-pill bg-success">{{issue.status}}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{issue.description}}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="float-start">
+                        <i class="text-muted">Raised By : {{issue.raised_by}}</i>
+                    </div>
+                    <div class="float-end">
+                        {% if 'Open' == issue.status %}
+                            <a href="/close_issue/{{issue.issue_id}}" type="button" class="btn btn-dark btn-sm mx-1">Close Issue</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+{% else %}
+
+<div class="container my-3">
+    <h3>You are not member of any village. Kindly add your village</h3>
+    <form action="{{ url_for('add_village') }}" method="POST">
+        <input class="form-control" list="villages" id="village" name="village" placeholder="Enter Your Village's Name">
+        <datalist id="villages">
+            {% for vil in allVillages %}
+            {{vil.village_name}}
+            <option value="{{vil.village_name}}">{{vil.village_name}}</option>
+            {% endfor %}
+        </datalist>
+        <button type="submit" class="btn btn-outline-dark">Add Village</button>
+    </form>
+</div>
+
+{% endif %}
+
+{% endblock body %}
