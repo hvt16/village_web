@@ -3,8 +3,11 @@
 {% block body %}
     
     {% if userdetails %}
-    <div class="container my-5">
+
+    <div class="card container my-5">
+      <div class="card-header">
         <h3>Your Details</h3>
+      </div>
     <table class="table table-striped">
         <tbody>
           <tr>
@@ -29,11 +32,12 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="d-flex justify-content-center mb-3">
+      <div class="card-footer d-flex justify-content-center mb-3">
         <a href="/update_password"><button class="btn btn-dark btn-sm mx-1">Update Password</button></a>
         <a href="/update_details"><button class="btn btn-dark btn-sm mx-1">Update Details</button></a>
     </div>
+    </div>
+    
     {% else %}
         <h3>No details found !!</h3>
     {% endif %}    

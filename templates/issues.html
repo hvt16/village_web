@@ -3,25 +3,6 @@
 {% block body %}
 
 {% if 'village_id' in user %}
-<h3>Raise An Issue</h3>
-<div class="container d-flex justify-content-center my-4">
-    <form action="/add_issue" method="POST">
-        <div class="mb-3">
-            <input type="text" class="form-control" name="subject" placeholder="Subject...">
-        </div>
-        <div class="mb-3">
-            <textarea type="text" class="form-control" name="description" rows="4" cols="50"
-                placeholder="Describe the issue..."></textarea>
-        </div>
-        <div class="d-flex justify-content-center mb-3">
-            <button type="submit" class="btn btn-dark">Add</button>
-        </div>
-    </form>
-</div>
-
-<hr>
-
-<h3>Issues</h3>
 
 <div class="container my-4">
 
@@ -62,6 +43,27 @@
     {% endif %}
 
 </div>
+
+<div class="card container mt-4">
+    <div class="card-header text-center">
+<h4>Raise An Issue</h4>
+</div>
+<div class="d-flex justify-content-center my-4">
+    <form action="/add_issue" method="POST">
+        <div class="mb-2">
+            <input type="text" class="form-control" name="subject" placeholder="Subject...">
+        </div>
+        <div class="mb-2">
+            <textarea type="text" class="form-control" name="description" rows="4" cols="50"
+                placeholder="Describe the issue..."></textarea>
+        </div>
+        <div class="d-flex justify-content-center mb-2">
+            <button type="submit" class="btn btn-dark">Add</button>
+        </div>
+    </form>
+</div>
+</div>
+
 {% else %}
 
 <div class="container my-3">

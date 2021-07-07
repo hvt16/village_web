@@ -2,7 +2,11 @@
 
 {% block body %}
 
-<div class="container my-3">
+<div class="container card my-3">
+  <div class="card-header">
+    <h3>Login here!</h3>
+  </div>
+  <div class="card-body text-center">
     <form action="/login" method="POST">
         <div class="mb-3">
           <input type="email" class="form-control" id="email" name="email" placeholder="Email">
@@ -15,6 +19,7 @@
       <div class="my-3">
         <span>don't have account? <a href="/register">sign up here</a></span>
       </div>
+</div>
 </div>
 {% if us %}
   {{us}}

@@ -1,10 +1,13 @@
 from flask import Flask, json,render_template,request,redirect,session
 from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_googlemaps import GoogleMaps
+import csv
+
 
 app = Flask(__name__)
 app.secret_key = "my secret key // will be updated"
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///users.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///application.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -26,8 +29,6 @@ class Village(db.Model):
     district = db.Column(db.String(50),nullable=False)
     state = db.Column(db.String(50),nullable=False)
     pincode = db.Column(db.String(50),nullable=False)
-    latitude = db.Column(db.String(50))
-    longitude = db.Column(db.String(50))
     head_email = db.Column(db.String(50),nullable=False)
     population = db.Column(db.Integer,default=0)
     def __repr__(self) -> str:
@@ -59,21 +60,20 @@ def admin():
         village_name = request.form['village_name']
         district = request.form['district']
         state = request.form['state']
-        pincode = request.form['pincode']
-        lat = request.form['lat']
-        long = request.form['long']
-        headsemail = request.form['headsemail']
+        # pincode = request.form['pincode']
+        # lat = request.form['lat']
+        # long = request.form['long']
+        # headsemail = request.form['headsemail']
         village  = Village(
             village_name = village_name,
             district = district,
             state = state,
-            pincode = pincode,
-            latitude = lat,
-            longitude = long,
-            head_email = headsemail
+            pincode = 100,
+            head_email = 'headsemail'
         )
         db.session.add(village)
         db.session.commit()
+        return redirect(url_for('dashboard'))
     return render_template('admin.html')
 
 @app.route('/')
@@ -114,8 +114,6 @@ def login():
                         'district': village.district,
                         'state': village.state,
                         'pincode': village.pincode,
-                        'latitude': village.latitude,
-                        'longitude': village.longitude,
                         'head_email': village.head_email,
                         'population': village.population,
                     }
@@ -140,6 +138,7 @@ def register():
         user = User(firstName=firstName,lastName=lastName,email=email,mobile=mobile,password=password,id_proof=filePath)
         db.session.add(user)
         db.session.commit()
+        return redirect(url_for('login'))
     return render_template('register.html')
 
 @app.route('/dashboard')
@@ -180,8 +179,6 @@ def add_village():
                     'district': village.district,
                     'state': village.state,
                     'pincode': village.pincode,
-                    'latitude': village.latitude,
-                    'longitude': village.longitude,
                     'head_email': village.head_email,
                     'population': village.population,
                 }
@@ -342,6 +339,10 @@ def logout():
     if 'user' in session:
         session.pop('user')
     return redirect(url_for('home'))
+
+@app.route('/test')
+def test():
+    return render_template('temp.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

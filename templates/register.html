@@ -2,7 +2,11 @@
 
 {% block body %}
 
-<div class="container my-3">
+<div class="container card my-3">
+  <div class="card-header">
+    <h3>Register Here!</h3>
+  </div>
+  <div class="card-body">
     <form action="/register" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" required>
@@ -31,7 +35,7 @@
       <div class="my-3">
         <span>already have account? <a href="/login">login here</a></span>
       </div>
-    
+    </div>
 </div>
     
 
